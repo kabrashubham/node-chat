@@ -6,10 +6,10 @@ socket.on('connect',function() {
     //     to:'mike@ex.com',
     //     text:'create email please'
     // })
-    socket.emit('createMessage',{
-        from:'hey bro',
-        text:'create email please'
-    })
+    // socket.emit('createMessage',{
+    //     from:'hey bro',
+    //     text:'create email please'
+    // })
 });
 socket.on('disconnect',function(){
     console.log('disconnected to server')

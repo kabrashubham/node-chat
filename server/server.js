@@ -24,16 +24,20 @@ io.on('connection', (socket) => {
     //     from: 'shubham@gmail.com',
     //     text: 'whats up'
     // });
-    socket.emit('newMessage', {
-        from: 'hey bro',
-        text: 'whats up bro'
-    });
+    // socket.emit('newMessage', {
+    //     from: 'hey bro',
+    //     text: 'whats up bro'
+    // });
 
     // socket.on('createEmail',(newEmail)=>{
     //     console.log('create email',newEmail);
     // })
     socket.on('createMessage',(newMessage)=>{
         console.log('create message',newMessage);
+        io.emit('newMessage',{
+            from : newMessage.from,
+            text:newMessage.text
+        })
     })
 
 
