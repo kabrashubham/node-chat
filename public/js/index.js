@@ -40,6 +40,28 @@ jQuery('#message-from').on('submit',function(e){
         from:'User',
         text:jQuery('[name=message]').val()
     },function(){
+        jQuery('[name=message]').val('');
+    })
+})
 
+var locationButton = jQuery('#send-location');
+
+locationButton.on('click',function(){
+    if(!navigator.geolocation){
+        return alert('geoloc not supported')
+    }
+
+
+    locationButton.attr('disabled','disabled')
+    navigator.geolocation.getCurrentPosition(function(position){
+        // console.log(position);
+        locationButton.removeAttr('disabled')
+        socket.emit('createLocationMessage',{
+            latitude : position.coords.latitude,
+            longtitude : position.coords.longitude
+        })
+    },function(){
+        locationButton.removeAttr('disabled')
+        alert('Unable to fetch location')
     })
 })

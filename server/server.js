@@ -48,14 +48,19 @@ io.on('connection', (socket) => {
             from : newMessage.from,
             text:newMessage.text
         })
-        callback('this is from the server');
+        callback();
         // socket.broadcast.emit('newMessage',{
         //     from : newMessage.from,
         //         text:newMessage.text
         // })
     })
 
-
+    socket.on('createLocationMessage', (coords) => {
+        io.emit('newMessage',{
+            from : 'Admin',
+            text:'Data' + `${coords.latitude}` + `${coords.longtitude}`
+        }, console.log(coords))
+    });
     socket.on('disconnect', () => {
         console.log('user disconnected to server')
     });
