@@ -42,12 +42,13 @@ io.on('connection', (socket) => {
             text: 'New user joined'
     })
 
-    socket.on('createMessage',(newMessage)=>{
+    socket.on('createMessage',(newMessage,callback)=>{
         console.log('create message',newMessage);
         io.emit('newMessage',{
             from : newMessage.from,
             text:newMessage.text
         })
+        callback('this is from the server');
         // socket.broadcast.emit('newMessage',{
         //     from : newMessage.from,
         //         text:newMessage.text
