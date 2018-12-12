@@ -32,12 +32,26 @@ io.on('connection', (socket) => {
     // socket.on('createEmail',(newEmail)=>{
     //     console.log('create email',newEmail);
     // })
+    socket.emit('newMessage',{
+        from: 'Admin',
+            text: 'welcome to chat app'
+    })
+
+    socket.broadcast.emit('newMessage',{
+        from: 'Admin',
+            text: 'New user joined'
+    })
+
     socket.on('createMessage',(newMessage)=>{
         console.log('create message',newMessage);
         io.emit('newMessage',{
             from : newMessage.from,
             text:newMessage.text
         })
+        // socket.broadcast.emit('newMessage',{
+        //     from : newMessage.from,
+        //         text:newMessage.text
+        // })
     })
 
 
